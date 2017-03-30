@@ -19,6 +19,7 @@
     "versionist": "git://github.com/resin-io/versionist.git#agile"
   },
   "devDependencies": {
+    "@semantic-release/condition-travis": "4.1.4",
     "versionist-plugins": "1.2.1"
   }
 }
