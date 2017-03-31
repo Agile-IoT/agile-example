@@ -26,14 +26,14 @@ before_install:
   - if [ "$BASEIMAGE" ] ; then sed -i "s/^FROM .*/FROM $BASEIMAGE/" Dockerfile ; fi
 
 script:
-  - git tag
   - git branch -a;
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
       export DOCKER_TAG=$TRAVIS_PULL_REQUEST_BRANCH;
     fi
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
       git checkout -b origin/${TRAVIS_PULL_REQUEST_BRANCH};
-      git merge master;
+      git merge origin/master;
+      git tag;
       versionist -d;
     fi
   - if [[ ${TRAVIS_PULL_REQUEST} == "false" && -n ${TRAVIS_TAG} ]]; then
