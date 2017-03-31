@@ -1,6 +1,6 @@
 var execSync = require('child_process').execSync;
 var plugins = require('versionist-plugins');
-var deploy = require('@semantic-release/condition-travis');
+var deploy = require('./deploy');
 
 var getAuthor = (commitHash) => {
   return execSync(`git show --quiet --format="%an" ${commitHash}`, { encoding: 'utf8' }).replace('\n', '');
