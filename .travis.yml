@@ -36,6 +36,7 @@ script:
     fi
 after_success:
   - git pull --rebase && npm i;
+  - echo $TRAVIS_PULL_REQUEST;
   - versionist
   - if [[ -n ${DOCKER_TAG} ]]; then
       docker push $DOCKER_IMAGE:$DOCKER_TAG;
