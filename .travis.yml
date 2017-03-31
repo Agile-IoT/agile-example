@@ -45,7 +45,7 @@ script:
     fi
 
 after_success:
-  - if [[ DOCKER_TAG -n ]]; then
+  - if [[ -n ${TRAVIS_TAG} ]]; then
       docker push $DOCKER_IMAGE:$DOCKER_TAG;
     fi
   - versionist
