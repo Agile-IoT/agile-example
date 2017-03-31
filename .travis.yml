@@ -34,6 +34,7 @@ script:
       export DOCKER_TAG=$TRAVIS_TAG;
     fi
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
+      git branch -a;
       git checkout origin/$TRAVIS_PULL_REQUEST_BRANCH;
       versionist -d;
     fi
