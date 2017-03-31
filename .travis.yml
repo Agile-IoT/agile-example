@@ -27,6 +27,7 @@ before_install:
 
 script:
   - git tag
+  - echo $TRAVIS_TAG
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
       export DOCKER_TAG=$TRAVIS_PULL_REQUEST_BRANCH;
     fi
