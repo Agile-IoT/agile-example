@@ -33,10 +33,11 @@ script:
   - if [[ ${TRAVIS_PULL_REQUEST} == "false" && -n ${TRAVIS_TAG} ]]; then
       export DOCKER_TAG=$TRAVIS_TAG;
     fi
-    
+
 after_success:
   - git checkout master;
   - echo $TRAVIS_PULL_REQUEST;
+  - git tag
   - git branch -a;
   - git status;
   - git remote set-url origin https://$GH_TOKEN@github.com/agile-iot/agile-example.git;
