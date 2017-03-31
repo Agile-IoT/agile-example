@@ -35,6 +35,7 @@ script:
   - if [[ ${TRAVIS_PULL_REQUEST} == "false" && -n ${TRAVIS_TAG} ]]; then
       export DOCKER_TAG=$TRAVIS_TAG;
     fi
+  - echo $DOCKER_TAG
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
       echo $DOCKER_TAG
       docker build -t $DOCKER_IMAGE:$DOCKER_TAG .;
@@ -43,7 +44,6 @@ script:
       mkdir -p $(dirname ${DOCKER_CACHE_FILE});
       docker save $(docker history -q $IMAGE:$DOCKER_TAG | grep -v '<missing>') | gzip > ${DOCKER_CACHE_FILE};
     fi
-
 after_success:
   - if [[ -n ${TRAVIS_TAG} ]]; then
       docker push $DOCKER_IMAGE:$DOCKER_TAG;
