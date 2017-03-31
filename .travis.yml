@@ -21,7 +21,7 @@ env:
       BASEIMAGE=resin\\/nuc-node:7.2.1
 
 install:
-  - git fetch --unshallow --tags
+  - git fetch --tags
 
 before_install:
   - git config --global user.name "Travis CI" && git config --global user.email "travis@travis-ci.org"
