@@ -35,7 +35,7 @@ script:
       export DOCKER_TAG=$TRAVIS_TAG;
     fi
 after_success:
-  - git pull --rebase && npm i;
+  - git checkout master;
   - echo $TRAVIS_PULL_REQUEST;
   - git branch -a;
   - git status
