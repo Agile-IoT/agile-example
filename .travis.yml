@@ -45,7 +45,7 @@ script:
       docker save $(docker history -q $IMAGE:$DOCKER_TAG | grep -v '<missing>') | gzip > ${DOCKER_CACHE_FILE};
     fi
 after_success:
-  - if [[ -n ${TRAVIS_TAG} ]]; then
+  - if [[ -n ${DOCKER_TAG} ]]; then
       docker push $DOCKER_IMAGE:$DOCKER_TAG;
     fi
   - versionist
