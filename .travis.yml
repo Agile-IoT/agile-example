@@ -30,13 +30,13 @@ before_install:
 
 script:
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
-      versionist;
-      DOCKER_TAG=$TRAVIS_PULL_REQUEST_BRANCH;
+      export DOCKER_TAG=$TRAVIS_PULL_REQUEST_BRANCH;
     fi
   - if [[ ${TRAVIS_PULL_REQUEST} == "false" && -n ${TRAVIS_TAG} ]]; then
-      DOCKER_TAG=$TRAVIS_TAG;
+      export DOCKER_TAG=$TRAVIS_TAG;
     fi
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
+      echo $DOCKER_TAG
       docker build -t $DOCKER_IMAGE:$DOCKER_TAG .;
     fi
   - if [[ ${TRAVIS_PULL_REQUEST} == "false" ]]; then
@@ -48,3 +48,4 @@ after_success:
   - if [[ DOCKER_TAG -n ]]; then
       docker push $DOCKER_IMAGE:$DOCKER_TAG;
     fi
+  - versionist
