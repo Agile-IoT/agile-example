@@ -21,30 +21,24 @@ env:
       BASEIMAGE=resin\\/nuc-node:7.2.1
 
 before_install:
-  - if [ -f $DOCKER_CACHE_FILE ]; then
-      gunzip -c $DOCKER_CACHE_FILE | docker load || true;
-    fi
   - docker run --rm --privileged multiarch/qemu-user-static:register
   - if [ "$BASEIMAGE" ] ; then sed -i "s/^FROM .*/FROM $BASEIMAGE/" Dockerfile ; fi
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
 
 script:
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
-      versionist -d;
-      DOCKER_TAG=$TRAVIS_PULL_REQUEST_BRANCH;
+      export DOCKER_TAG=$TRAVIS_PULL_REQUEST_BRANCH;
     fi
   - if [[ ${TRAVIS_PULL_REQUEST} == "false" && -n ${TRAVIS_TAG} ]]; then
-      DOCKER_TAG=$TRAVIS_TAG;
+      export DOCKER_TAG=$TRAVIS_TAG;
     fi
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
+      echo $DOCKER_TAG;
       docker build -t $DOCKER_IMAGE:$DOCKER_TAG .;
     fi
-  - if [[ ${TRAVIS_PULL_REQUEST} == "false" ]]; then
-      mkdir -p $(dirname ${DOCKER_CACHE_FILE});
-      docker save $(docker history -q $IMAGE:$DOCKER_TAG | grep -v '<missing>') | gzip > ${DOCKER_CACHE_FILE};
-    fi
-
 after_success:
-  - if [[ DOCKER_TAG -n ]]; then
+  - if [[ -n ${DOCKER_TAG} ]]; then
+      echo 'RUN';
       docker push $DOCKER_IMAGE:$DOCKER_TAG;
     fi
+  - versionist
