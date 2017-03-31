@@ -30,7 +30,7 @@ before_install:
 
 script:
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
-      versionist -d;
+      versionist;
       DOCKER_TAG=$TRAVIS_PULL_REQUEST_BRANCH;
     fi
   - if [[ ${TRAVIS_PULL_REQUEST} == "false" && -n ${TRAVIS_TAG} ]]; then
