@@ -6,7 +6,7 @@ var SRError = require('@semantic-release/error')
 module.exports = function (config, cb) {
   var env = process.env;
   var options = {
-    branch: 'feat';
+    branch: 'feat'
   }
 
   if (env.TRAVIS !== 'true') {
