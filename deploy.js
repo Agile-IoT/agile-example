@@ -3,7 +3,7 @@ var deployOnce = require('travis-deploy-once')
 var semver = require('semver')
 var SRError = require('@semantic-release/error')
 
-module.exports = function (cwd, version, callback) {
+module.exports = function (cwd, version, cb) {
   var env = process.env;
   var options = {
     branch: 'feat'
