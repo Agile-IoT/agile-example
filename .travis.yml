@@ -27,16 +27,16 @@ before_install:
 
 script:
   - git tag
+  - git branch -a;
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
       export DOCKER_TAG=$TRAVIS_PULL_REQUEST_BRANCH;
     fi
-  - if [[ ${TRAVIS_PULL_REQUEST} == "false" && -n ${TRAVIS_TAG} ]]; then
-      export DOCKER_TAG=$TRAVIS_TAG;
-    fi
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
-      git branch -a;
       git checkout origin/$TRAVIS_PULL_REQUEST_BRANCH;
       versionist -d;
+    fi
+  - if [[ ${TRAVIS_PULL_REQUEST} == "false" && -n ${TRAVIS_TAG} ]]; then
+      export DOCKER_TAG=$TRAVIS_TAG;
     fi
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
       docker build -t $DOCKER_IMAGE:$DOCKER_TAG .;
