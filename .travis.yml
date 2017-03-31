@@ -24,7 +24,6 @@ before_install:
   - git config --global user.name "Travis CI" && git config --global user.email "travis@travis-ci.org"
   - docker run --rm --privileged multiarch/qemu-user-static:register
   - if [ "$BASEIMAGE" ] ; then sed -i "s/^FROM .*/FROM $BASEIMAGE/" Dockerfile ; fi
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
 
 script:
   - git tag
@@ -34,13 +33,15 @@ script:
   - if [[ ${TRAVIS_PULL_REQUEST} == "false" && -n ${TRAVIS_TAG} ]]; then
       export DOCKER_TAG=$TRAVIS_TAG;
     fi
+    
 after_success:
   - git checkout master;
   - echo $TRAVIS_PULL_REQUEST;
   - git branch -a;
-  - git status
+  - git status;
   - git remote set-url origin https://$GH_TOKEN@github.com/agile-iot/agile-example.git;
   - versionist;
   - if [[ -n ${DOCKER_TAG} ]]; then
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
       docker push $DOCKER_IMAGE:$DOCKER_TAG;
     fi
