@@ -32,7 +32,7 @@ script:
       export DOCKER_TAG=$TRAVIS_PULL_REQUEST_BRANCH;
     fi
   - if [[ ${TRAVIS_PULL_REQUEST} != "false" ]]; then
-      git checkout pr-branch;
+      git checkout -b ${TRAVIS_PULL_REQUEST_BRANCH};
       git merge master;
       versionist -d;
     fi
