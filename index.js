@@ -8,7 +8,7 @@ function devicePoll() {
   setInterval(function () {
     agile.protocolManager.devices()
     .then(function(devices) {
-      console.log(devices);
+      // console.log(devices);
       db.ref().set(devices);
     })
     .catch(function(err) {
