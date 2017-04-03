@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "@semantic-release/condition-travis": "4.1.4",
-    "versionist-plugins": "1.2.1"
+    "versionist-plugins": "1.3.1"
   }
 }

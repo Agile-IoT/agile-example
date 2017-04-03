@@ -1,6 +1,5 @@
 var execSync = require('child_process').execSync;
 var plugins = require('versionist-plugins');
-var shouldDeploy = require('./should-deploy');
 
 var getAuthor = (commitHash) => {
   return execSync(`git show --quiet --format="%an" ${commitHash}`, { encoding: 'utf8' }).replace('\n', '');
@@ -14,7 +13,7 @@ module.exports = {
   parseFooterTags: true,
   getGitReferenceFromVersion: 'v-prefix',
   incrementVersion: 'semver',
-  updateVersion: [ plugins.git.commit, plugins.git.tag, shouldDeploy, plugins.git.push, plugins.git.pushTags ],
+  updateVersion: [ plugins.shouldDeploy, plugins.git.commit, plugins.git.tag, plugins.git.push, plugins.npm.updatePackageJSON ],
 
   // Always add the entry to the top of the Changelog, below the header.
   addEntryToChangelog: {

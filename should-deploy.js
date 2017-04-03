@@ -1,13 +1,16 @@
-var deployOnce = require('travis-deploy-once')
+var conditionTravis = require('@semantic-release/condition-travis')
 
 var semver = require('semver')
 var SRError = require('@semantic-release/error')
 
 module.exports = function (cwd, version, cb) {
-  var env = process.env;
-  var options = {
+  var config;
+  var config.env = process.env;
+  var config.options = {
     branch: 'master'
   }
+
+  travisCondition({}, config, cb)
 
   if (env.TRAVIS !== 'true') {
     return cb(new SRError(
