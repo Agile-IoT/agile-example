@@ -1,4 +1,4 @@
-FROM resin/raspberrypi3-node:7.6-20170318
+FROM resin/nuc-node:7.2.1
 
 # use apt-get if you need to install dependencies,
 # for instance if you need ALSA sound utils, just uncomment the lines below.
