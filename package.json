@@ -1,0 +1,24 @@
+{
+  "name": "agile-example",
+  "version": "1.0.0",
+  "description": "agile example service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "agile-example"
+  },
+  "author": "craig-mulligan",
+  "license": "ISC",
+  "dependencies": {
+    "agile-sdk": "0.4.0",
+    "firebase": "3.7.3",
+  },
+  "devDependencies": {
+    "versionist-plugins": "1.3.1",
+    "versionist": "git://github.com/resin-io/versionist.git#agile"
+  }
+}
