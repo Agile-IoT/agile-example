@@ -44,8 +44,4 @@ Now follow your normal git workflow and you should automatically get versioned d
 
 If you have any issues questions please [open an issue](https://github.com/agile-iot/agile-example/issues)
 
-#### Bonus
-
-You can also make the built container way smaller by using [rocker](https://github.com/grammarly/rocker) it basically allows you throw away anything that you don't need at runtime and ship the built container.
-
-@craig-mulligan is using it for the [agile-ui](https://github.com/Agile-IoT/agile-ui/blob/master/Rockerfile). Ask him questions if you'd like to get it set up.
+blah blah

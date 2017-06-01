@@ -22,10 +22,10 @@ module.exports = {
   getGitReferenceFromVersion: 'v-prefix',
   incrementVersion: 'semver',
   updateVersion: [
+    plugins.npm.updatePackageJSON,
     plugins.git.commit,
     plugins.git.tag,
-    plugins.git.push,
-    plugins.npm.updatePackageJSON
+    plugins.git.push
   ],
 
   // Always add the entry to the top of the Changelog, below the header.
@@ -70,4 +70,4 @@ module.exports = {
     '{{/if}}',
     '{{/each}}'
   ].join('\n')
-};
+}
