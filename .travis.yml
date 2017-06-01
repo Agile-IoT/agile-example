@@ -23,7 +23,7 @@ env:
 
 before_install:
   - source <(curl -s https://raw.githubusercontent.com/Agile-IoT/agile-ci-scripts/master/before_install.sh)
-  - echo "Tagging the build with - $DOCKER_TAG"
+  - echo "Tagging the build with tag - $DOCKER_TAG"
 
 script:
   - if [[ -n ${DOCKER_TAG} ]]; then
