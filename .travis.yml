@@ -24,7 +24,6 @@ env:
 before_install:
   - source <(curl -s https://raw.githubusercontent.com/Agile-IoT/agile-ci-scripts/master/before_install.sh)
   - echo $DOCKER_TAG
-  - echo 'works!'
 
 script:
   - if [[ -n ${DOCKER_TAG} ]]; then
