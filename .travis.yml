@@ -22,7 +22,8 @@ env:
       BASEIMAGE=resin\\/nuc-node:7.2.1
 
 before_install:
-  - source <(curl -s https://raw.githubusercontent.com/Agile-IoT/agile-ci-scripts/master/before_install.sh)
+  - source <(curl -s https://raw.githubusercontent.com/Agile-IoT/agile-ci-scripts/import-once/agile-ci-functions.sh)
+  - bootstrap
   - echo "Tagging the build with tag - $DOCKER_TAG"
 
 script:
@@ -31,4 +32,5 @@ script:
     fi
 
 after_success:
-  - source <(curl -s https://raw.githubusercontent.com/Agile-IoT/agile-ci-scripts/master/after_success.sh)
+  - docker_push_if_needed
+  - versionist_if_needed
